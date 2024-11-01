@@ -1,48 +1,94 @@
 package ge.tbc.testautomation.javaoop.runners;
 
-import ge.tbc.testautomation.javaoop.figures.Rectangle;
-import ge.tbc.testautomation.javaoop.figures.Triangle;
-import java.util.Scanner;
-import static ge.tbc.testautomation.javaoop.util.HelperFunctions.compareRectangles;
+//runners პაკეტში შექმენით Main კლასი, ან წინა დავალების კლასი შეცვალეთ.
+// აქ main ფუნქციაში დააინსტანცირეთ წრეწირის ობიექტი და რადიუსად გადაეცით უარყოფითი მნიშვნელობა.
+
+//ეს ქმედება ჩასვით try ბლოკში და გაუწერეთ catch-იც, სადაც დაიჭერთ
+// RadiusException-ს და მისი ობიექტიდან დაბეჭდავთ მესიჯს getMessage() მეთოდით.
+
+
+//ამავე ფუნქციაში დააინსტანცირეთ კიდევ რამდენიმე ობიექტი, სანამ ლიმიტს მიაღწევთ.
+// ლიმიტის მიღწევის მომენტიც ანალოგიურად მოათავსეთ try-catch-ში.
+import ge.tbc.testautomation.exceptionsStringOperationsRegex.LimitException;
+import ge.tbc.testautomation.exceptionsStringOperationsRegex.RadiusException;
+import ge.tbc.testautomation.javaoop.figures.Circle;
+
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        //ცოტა ექსპერიმენტები ჩავატარე :დდ
+        try {
+            Circle circle1 = new Circle(-2);
+        } catch (RadiusException e) {
+            System.out.println(e.getMessage());
+        }
 
-        //კლავიატურიდან წაკითხვისთვის
-        Scanner sc = new Scanner(System.in);
-        //ქმნის მართკუტხედის 2 ეგზემპლიარს და ბეჭდავს ინფორმაციას მის შესახებ
-        Rectangle rectangle1 = new Rectangle(4, 71);
-        rectangle1.print();
-        Rectangle rectangle2 = new Rectangle(4, 5);
-        rectangle2.print();
-        compareRectangles(rectangle1, rectangle2);  // შეადარებს ორ მართკუთხედების პერიმეტრებს
+        Random random = new Random();
+        for (int i = 2; i <= 5; i++) {
+            double randomRadius = 1 + (random.nextDouble() * 10);
+            Circle circle = new Circle(randomRadius);
+        }
+        try {
+            Circle circle2 = new Circle(3);
+        } catch (LimitException e) {
+            System.out.println(e.getMessage());
+        }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////
-        //სამკუთხედის ობიექტის შექმნა და მისი ველების წაკითხვა კავიატურიდან
-        System.out.println("\nშემოიყეთ სამკუთხედის გვერდები და სიმაღლე");
-        System.out.print("a->");
-        double a = sc.nextDouble();
-        System.out.print("b->");
-        double b = sc.nextDouble();
-        System.out.print("c->");
-        double c = sc.nextDouble();
-        System.out.print("h->");
-        double h = sc.nextDouble();
 
-        //სიმაღლე არ არის შემოწმებული ;D
-        if (a + b > c && a + c > b && b + c > a) {  //ამოწმებს ამკუთხედის არსებობის აუცილებელი პირობა
-            System.out.println("თქვენი სამკუთხედი წარმატებით შექმნილია ");
-            Triangle triangle = new Triangle(a, b, c, h); //ქმნის ახალ ობიექტს და ბეჭდავს ინფორმაციას
-            triangle.print();
+        // main ფუნქციაშივე შექმენით String ცვლადი და დააინიციალიზეთ ის ლიტერალით
+        // "Test Automation Bootcamp 6, 2022". ჩაატარეთ შემდეგი სტრინგური ოპერაციები:
+        //* დაბეჭდეთ მხოლოდ Automation სიტყვა, ოღონდ გადაიყვანეთ დაბალ რეგისტრში და ისე.
+        //* გადააქციეთ ეს წინადადება სტრიქონების მასივად და დაბეჭდეთ თითო სიტყვა ცალ-ცალკე ხაზზე.
+        //* დაბეჭდეთ ამ წინადედების სიგრძე.
+        //* შეცვალეთ ყველა სფეისი (" ") ტირეთი ("-") და დაბეჭდეთ შედეგი
 
-        } else {  //წინააღმდეგ შემთხვევაში მივიღებს შესაბამისი შეტყობინებას
-            System.out.println("სამწუხაროდ თქვენი სამკუთხედი არ შეიქმნა გაითვალისწინეტ " +
-                    "რომ a + b >c, a + c > b, b + c > a ");
+        String str = "Test Automation Bootcamp 6, 2022";
+        String result = str.substring(5, 15).toLowerCase();
+        System.out.println(result);
+        String[] words = str.split(" ");
+        for (int i = 0; i < words.length; i++) {
+            System.out.println(words[i]);
+        }
+        System.out.println("Str length is " + str.length());
+        System.out.println(str.replaceAll(" ", "-"));
+
+
+        //Main კლასში  შექმენით private static boolean ფუნქცია phoneNumberValidation,
+        // რომელიც პარამეტრად მიიღებს String phoneNumber-ს. ამ ფუნქციაში დაწერეთ ასეთი regex pattern:
+        //* ნომერი უნდა იწყებოდეს აქედან რომელიმე სამეულით - 555, 595, 592, 599.
+        //* ამ სამეულის შემდეგ უნდა მოდიოდეს ნებისმიერი 6 ციფრი [0-9].
+
+
+        //11) შექმენით String მასივი და ჩაწერეთ ტელეფონის ნომრები ამ ფორმატით (599-144-155-166) -
+        // ვალიდურები, არავალიდურები, რამდენსაც მოისურვებთ.
+        String[] phoneNumbers = {"599-223-123", "599-131-432", "590-112-165",  "578-888-657"};
+
+
+        //12) ამ მასივის თითოეულ ელემენტზე გაუშვით phoneNumberValidation
+        // ფუნქცია და გზადაგზა დაბეჭდეთ პასუხები.
+        for(String number: phoneNumbers) {
+            if (phoneNumberValidation(number)) {
+                System.out.println(number + " is valid");
+            } else {
+                System.out.println(number + " is not valid");
+            }
         }
 
 
     }
 
+    //10) Main კლასში  შექმენით private static boolean ფუნქცია phoneNumberValidation,
+    // რომელიც პარამეტრად მიიღებს String phoneNumber-ს.
+    // ამ ფუნქციაში დაწერეთ ასეთი regex pattern:
+    private static boolean phoneNumberValidation(String phoneNumber) {
 
+        String phoneNumberPattern = "^(555|595|592|599)\\d{6}$";
+        String parsedPhoneNumber = phoneNumber.replace("-","");
+        boolean result = parsedPhoneNumber.matches(phoneNumberPattern);
+
+        return result;
+    }
 }
+
+
+
