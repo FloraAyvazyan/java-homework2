@@ -3,22 +3,13 @@ package ge.tbc.testautomation.javaoop.figures;
 
 import ge.tbc.testautomation.abstractClassesInterfaces.interfaces.IResizableCircle;
 import ge.tbc.testautomation.abstractClassesInterfaces.interfaces.IValidCircle;
-import ge.tbc.testautomation.exceptionsStringOperationsRegex.LimitException;
 
+//6) წინა დავალებებიდან აიღეთ რომელიმე Circle კლასი,
+// გაუწერეთ toString მეთოდი და დააიმპლემენტირებინეთ
+// Comparable ინტერფეისი. კომპაილერი მოგთხოვთ compareTo
+// მეთოდის რეალიზაციას და აქ გაწერეთ ეს ლოგიკა:
 
-//არსებული Circle კლასი გახადეთ აბსტრაქტული Figure-ის შვილობილი.
-
-//Circle-ში კომპილატორი მოგთხოვთ მეთოდების რეალიზაციას:
-// getArea და getLength წინა დავალების მსგავსად, ხოლო
-//printPackage-ში დაბეჭდეთ მიმდინარე ობიექტის კლასის პაკეტის
-// დასახელება (ეს უკანასკნელი ნაწილი მოიძიეთ ინტერნეტში).
-
-//6) არსებულ Circle კლასს დააიმპლემენტირებინეთ IResizableCircle ამგვარად:
-
-//Circle კლასში დააიმპლემენტირეთ ეს ინტერფეისიც და რეალიზაცია გაუკეთეთ მის მეთოდსაც:
-
-
-public class Circle extends Figure implements IResizableCircle, IValidCircle {
+public class Circle extends Figure implements IResizableCircle, IValidCircle, Comparable{
     private double radius;
 
 
@@ -43,7 +34,6 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle {
        // }
         this.radius = radius;
 
-        System.out.print("Created new Circle object");
 
     }
 
@@ -86,4 +76,28 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle {
     }
 
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "radius=" + radius +
+                '}';
+    }
+
+    //* თუ თავად ობიექტის რადიუსი (this) მეტია ჩაწოდებული
+// ობიექტის რადიუსზე (other), მეთოდმა დააბრუნოს 1.
+//* თუ თავად ობიექტის რადიუსი ნაკლებია ჩაწოდებული
+// ობიექტის რადიუსზე, მეთოდმა დააბრუნოს -1;
+//* თუ რადიუსები ტოლია, მეთოდმა დააბრუნოს 0.
+    @Override
+    public int compareTo(Object o) {
+        if (!(o instanceof Circle)) { return -1;}
+        Circle other = (Circle) o;
+        //თუ რადიუსები ერთმანეთის ტოლია დაბრუნოს 0
+        if (radius == other.radius) { return 0; }
+        // ვთქვათ რომ ის ობიექტია ნაკლები, რომლის რადიუსი ნაკლებია
+        return radius < other.radius ? -1 : 1;
+
+    }
 }

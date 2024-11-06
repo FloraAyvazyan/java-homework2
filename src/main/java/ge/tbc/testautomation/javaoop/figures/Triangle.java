@@ -14,15 +14,16 @@ public class Triangle {
         this.c = c;
         this.b = b;
     }
-    // ფუნქციები
 
+    // ფუნქციები
     public double getArea() {
         return (a*h)/2;
     }
-
     public double getPerimeter() {
         return a +b +c;
     }
+
+
     //ბეჭდვის ფუნქცია
     public void print(){
         System.out.println("\nსამკუთხედის  გვერდებია: " + a + " " +b + " " +c +" სიმაღლე " + h);

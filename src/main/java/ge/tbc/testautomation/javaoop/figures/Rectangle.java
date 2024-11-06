@@ -1,9 +1,9 @@
 package ge.tbc.testautomation.javaoop.figures;
-// ამავე პაკეტში დაამატეთ კლასი Rectangle (double a,b ველებით) და
-// გახადეთ ის Figure-ს შვილობილი.
-//Rectangle კლასში გადაფარეთ (override) Figure-ის ორივე მეთოდი, მაგრამ -1-ის ნაცვლად ამ ფუნქციებმა
-//დააბრუნონ მართკუთხედის ფართობისა და პერიმეტრის ფორმულით მიღებული შედეგები.
 
+
+//9) შექმენით Rectangle კლასი (ან გამოიყენეთ არსებული) და მისთვის
+// დაწერეთ reverse comparator და ამ კომპარატორის მიხედვით დაალაგეთ
+// Rectangle ობიექტების ლისტი.
 public class Rectangle {
     private  double a, b;
 
@@ -13,20 +13,27 @@ public class Rectangle {
         this.a = a;
     }
     // ფუნქცია ფართობისთის
-
     public double getArea() {
         return a*b;
     }
-    // ფუნქცია პერიმეტრისთვის
 
+    // ფუნქცია პერიმეტრისთვის
     public double getPerimeter() {
         return 2*(a+b);
     }
+
+
     //ბეჭდვის ფუნქცია
     public void print(){
         System.out.println("\nმართკუთხედის გვერდებია: " + a + " " +b);
         System.out.println("პერიმეტრი:" + this.getPerimeter());
         System.out.println("ფართობი:" + this.getArea());
 
+    }
+
+    //toString მეთოდის გადაფარვა
+    @Override
+    public String toString() {
+        return "Rectangle perimetr " + getPerimeter();
     }
 }
