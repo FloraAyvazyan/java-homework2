@@ -42,7 +42,9 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle {
        //     throw new RadiusException("RADIUS VALUE NOT VALID");
        // }
         this.radius = radius;
-        System.out.println("Hi ");
+
+        System.out.print("Created new Circle object");
+
     }
 
     @Override
@@ -82,4 +84,6 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle {
     public boolean validateCircle(Circle circle) {
         return circle.getRadius() > 0;
     }
+
+
 }
