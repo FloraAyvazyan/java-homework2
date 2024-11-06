@@ -4,7 +4,7 @@ package ge.tbc.testautomation.javaoop.figures;
 // Figure-ს შვილობილი გახადეთ. ამ კლასშიც გადაფარეთ Figure-ის ორივე მეთოდი,
 // მაგრამ აქ უკვე სამკუთხედის ფორმულით იხელმძღვანელეთ.
 // სიმარტივისთვის სიმაღლე ხელით გაწერეთ.
-public class Triangle extends Figure{
+public class Triangle {
     private  double a, b, c, h;
 
     //პარამეტრიანი ონსტრუქტორი
@@ -14,12 +14,12 @@ public class Triangle extends Figure{
         this.c = c;
         this.b = b;
     }
-    //გადაფარული ფუნქციები
-    @Override
+    // ფუნქციები
+
     public double getArea() {
         return (a*h)/2;
     }
-    @Override
+
     public double getPerimeter() {
         return a +b +c;
     }

@@ -4,7 +4,7 @@ package ge.tbc.testautomation.javaoop.figures;
 //Rectangle კლასში გადაფარეთ (override) Figure-ის ორივე მეთოდი, მაგრამ -1-ის ნაცვლად ამ ფუნქციებმა
 //დააბრუნონ მართკუთხედის ფართობისა და პერიმეტრის ფორმულით მიღებული შედეგები.
 
-public class Rectangle extends Figure {
+public class Rectangle {
     private  double a, b;
 
     //პარამეტრიანი კოსტრუქტორი
@@ -12,13 +12,13 @@ public class Rectangle extends Figure {
         this.b = b;
         this.a = a;
     }
-    //გადაფარული ფუნქცია ფართობისთის
-    @Override
+    // ფუნქცია ფართობისთის
+
     public double getArea() {
         return a*b;
     }
-    //გადაფარული ფუნქცია პერიმეტრისთვის
-    @Override
+    // ფუნქცია პერიმეტრისთვის
+
     public double getPerimeter() {
         return 2*(a+b);
     }

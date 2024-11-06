@@ -1,91 +1,43 @@
 package ge.tbc.testautomation.javaoop.runners;
 
-//runners პაკეტში შექმენით Main კლასი, ან წინა დავალების კლასი შეცვალეთ.
-// აქ main ფუნქციაში დააინსტანცირეთ წრეწირის ობიექტი და რადიუსად გადაეცით უარყოფითი მნიშვნელობა.
-
-//ეს ქმედება ჩასვით try ბლოკში და გაუწერეთ catch-იც, სადაც დაიჭერთ
-// RadiusException-ს და მისი ობიექტიდან დაბეჭდავთ მესიჯს getMessage() მეთოდით.
-
-
-//ამავე ფუნქციაში დააინსტანცირეთ კიდევ რამდენიმე ობიექტი, სანამ ლიმიტს მიაღწევთ.
-// ლიმიტის მიღწევის მომენტიც ანალოგიურად მოათავსეთ try-catch-ში.
-
-import ge.tbc.testautomation.exceptionsStringOperationsRegex.LimitException;
-import ge.tbc.testautomation.exceptionsStringOperationsRegex.RadiusException;
 import ge.tbc.testautomation.javaoop.figures.Circle;
-import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            Circle circle1 = new Circle(-2);
-        } catch (RadiusException e) {
-            System.out.println(e.getMessage());
-        }
+        // ვქმნით ორ Circle ობიექტს, ერთს დადებითი და მეორეს უარყოფითი რადიუსით
+        Circle positiveRadiusCircle = new Circle(7);
+        Circle negativeRadiusCircle = new Circle(-5);
 
-        Random random = new Random();
-        for (int i = 2; i <= 5; i++) {
-            double randomRadius = 1 + (random.nextDouble() * 10);
-            Circle circle = new Circle(randomRadius);
-        }
-        try {
-            Circle circle2 = new Circle(3);
-        } catch (LimitException e) {
-            System.out.println(e.getMessage());
-        }
-
-
-        // main ფუნქციაშივე შექმენით String ცვლადი და დააინიციალიზეთ ის ლიტერალით
-        // "Test Automation Bootcamp 6, 2022". ჩაატარეთ შემდეგი სტრინგური ოპერაციები:
-        //* დაბეჭდეთ მხოლოდ Automation სიტყვა, ოღონდ გადაიყვანეთ დაბალ რეგისტრში და ისე.
-        //* გადააქციეთ ეს წინადადება სტრიქონების მასივად და დაბეჭდეთ თითო სიტყვა ცალ-ცალკე ხაზზე.
-        //* დაბეჭდეთ ამ წინადედების სიგრძე.
-        //* შეცვალეთ ყველა სფეისი (" ") ტირეთი ("-") და დაბეჭდეთ შედეგი
-
-        String str = "Test Automation Bootcamp 6, 2022";
-        String result = str.substring(5, 15).toLowerCase();
-        System.out.println(result);
-        String[] words = str.split(" ");
-        for (int i = 0; i < words.length; i++) {
-            System.out.println(words[i]);
-        }
-        System.out.println("Str length is " + str.length());
-        System.out.println(str.replaceAll(" ", "-"));
-
-
-        //Main კლასში  შექმენით private static boolean ფუნქცია phoneNumberValidation,
-        // რომელიც პარამეტრად მიიღებს String phoneNumber-ს. ამ ფუნქციაში დაწერეთ ასეთი regex pattern:
-        //* ნომერი უნდა იწყებოდეს აქედან რომელიმე სამეულით - 555, 595, 592, 599.
-        //* ამ სამეულის შემდეგ უნდა მოდიოდეს ნებისმიერი 6 ციფრი [0-9].
-
-
-        //11) შექმენით String მასივი და ჩაწერეთ ტელეფონის ნომრები ამ ფორმატით (599-144-155-166) -
-        // ვალიდურები, არავალიდურები, რამდენსაც მოისურვებთ.
-        String[] phoneNumbers = {"599-223-123", "599-131-432", "590-112-165",  "578-888-657"};
-
-
-        //12) ამ მასივის თითოეულ ელემენტზე გაუშვით phoneNumberValidation
-        // ფუნქცია და გზადაგზა დაბეჭდეთ პასუხები.
-        for(String number: phoneNumbers) {
-            if (phoneNumberValidation(number)) {
-                System.out.println(number + " is valid");
-            } else {
-                System.out.println(number + " is not valid");
-            }
-        }
-
-
+        // ვიძახებთ საერთო მეთოდს თითოეული წრეწირის ობიექტისთვის
+        demonstrateCircle(positiveRadiusCircle, "\nCircle No1");
+        demonstrateCircle(negativeRadiusCircle, "\nCircle No2");
     }
 
-    //10) Main კლასში  შექმენით private static boolean ფუნქცია phoneNumberValidation,
-    // რომელიც პარამეტრად მიიღებს String phoneNumber-ს.
-    // ამ ფუნქციაში დაწერეთ ასეთი regex pattern:
-    private static boolean phoneNumberValidation(String phoneNumber) {
+    // საერთო მეთოდი წრეწირის დემონსტრაციისთვის
+    private static void demonstrateCircle(Circle circle, String circleName) {
+        System.out.print(circleName + "\nRadius = " + circle.getRadius());
 
-        String phoneNumberPattern = "^(555|595|592|599)\\d{6}$";
-        String parsedPhoneNumber = phoneNumber.replace("-","");
-        boolean result = parsedPhoneNumber.matches(phoneNumberPattern);
+        if (circle.validateCircle(circle)) {
+            System.out.println("\nArea: " + circle.getArea());
+            System.out.println("Length: " + circle.getLength());
+            circle.printPackageName();
 
-        return result;
+            // IResizableCircle მეთოდების დემონსტრაცია
+            circle = circle.returnDoubleSizedCircle(circle);
+            System.out.println("Double Sized Circle Radius: " + circle.getRadius());
+
+            // მომხმარებლის შეყვანის მოთხოვნა
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter the multiplier to scale the circle's radius: ");
+            double multiplier = scanner.nextDouble();
+
+            // რადიუსის გაზრდა შეყვანილი მნიშვნელობის მიხედვით
+            circle = circle.returnCustomSizedCircle(circle, multiplier);
+            System.out.println("Custom Sized Circle Radius: " + circle.getRadius());
+
+        } else {
+            System.out.println("\nCircle's radius is not valid.");
+        }
     }
 }
