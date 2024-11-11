@@ -1,20 +1,11 @@
 package ge.tbc.testautomation.javaoop.figures;
 
-
 import ge.tbc.testautomation.abstractClassesInterfaces.interfaces.IResizableCircle;
 import ge.tbc.testautomation.abstractClassesInterfaces.interfaces.IValidCircle;
 
-//6) წინა დავალებებიდან აიღეთ რომელიმე Circle კლასი,
-// გაუწერეთ toString მეთოდი და დააიმპლემენტირებინეთ
-// Comparable ინტერფეისი. კომპაილერი მოგთხოვთ compareTo
-// მეთოდის რეალიზაციას და აქ გაწერეთ ეს ლოგიკა:
-
 public class Circle extends Figure implements IResizableCircle, IValidCircle, Comparable{
     private double radius;
-
-
     //Getter ფუნქცია
-
     public double getRadius() {
         return radius;
     }
@@ -26,15 +17,7 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle, Co
 
     //პარამეტრიანი კონსტრუქტორი
     public Circle(double radius) {
-       // if (numberOfInstances > 5) {
-       //     throw new LimitException("INSTANTIATION LIMIT REACHED");
-       // }
-       // if (radius < 0) {
-       //     throw new RadiusException("RADIUS VALUE NOT VALID");
-       // }
         this.radius = radius;
-
-
     }
 
     @Override
@@ -52,9 +35,6 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle, Co
         System.out.println(this.getClass().getPackage().getName());
     }
 
-    //* returnDoubleSizedCircle მეთოდმა დააბრუნოს გადაცემული წრეწირი გაორმაგებული რადიუსით.
-    //* returnCustomSizedCircle მეთოდმა დააბრუნოს გადაცემული წრეწირი,
-    // რომლის რადიუსიც გადაცემულ რიცხვზეა გამრავლებული.
     @Override
     public Circle returnDoubleSizedCircle(Circle circle) {
         circle.setRadius(circle.getRadius() * 2);
@@ -67,29 +47,17 @@ public class Circle extends Figure implements IResizableCircle, IValidCircle, Co
         return circle;
     }
 
-    //* validateCircle მეთოდმა დააბრუნოს true თუ გადაცემული წრეწირის რადიუსი დადებითი
-    // მნიშვნელობისაა,
-    // წინააღმდეგ შემთხვევაში - false.
     @Override
     public boolean validateCircle(Circle circle) {
         return circle.getRadius() > 0;
     }
 
-
-
     ///////////////////////////////////////////////////////////////////////////////////////
     @Override
     public String toString() {
-        return "Circle{" +
-                "radius=" + radius +
-                '}';
+        return "Circle{" + "radius=" + radius + '}';
     }
 
-    //* თუ თავად ობიექტის რადიუსი (this) მეტია ჩაწოდებული
-// ობიექტის რადიუსზე (other), მეთოდმა დააბრუნოს 1.
-//* თუ თავად ობიექტის რადიუსი ნაკლებია ჩაწოდებული
-// ობიექტის რადიუსზე, მეთოდმა დააბრუნოს -1;
-//* თუ რადიუსები ტოლია, მეთოდმა დააბრუნოს 0.
     @Override
     public int compareTo(Object o) {
         if (!(o instanceof Circle)) { return -1;}

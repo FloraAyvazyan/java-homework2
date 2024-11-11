@@ -12,8 +12,8 @@ public class ReverseComparator implements Comparator {
         Rectangle r1 = (Rectangle)o1;
         Rectangle r2 = (Rectangle)o2;
      // ავიღოთ პერიმეტრები
-        double perimetr1 = r1.getPerimeter();
-        double perimetr2 = r2.getPerimeter();
+        double perimetr1 = r1.getLength();
+        double perimetr2 = r2.getLength();
 
         //კლებატობით დალაგება
         return - Double.compare(perimetr1, perimetr2);
