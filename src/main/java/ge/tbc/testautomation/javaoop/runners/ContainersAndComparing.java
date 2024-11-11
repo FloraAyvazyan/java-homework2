@@ -11,7 +11,7 @@ import java.util.*;
 // ამ კლასის main მეთოდში შექმენით String ელემენტების მქონე ArrayList და დაამატეთ ეს ელემენტები:
 //* "555-542-231", "555-887-987", "555-161-143", "555-189-6667".
 public class ContainersAndComparing {
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("All")
     public static void main(String[] args) {
         //ახალი სიის შექმნა
         ArrayList<String> arrList = new ArrayList<>();

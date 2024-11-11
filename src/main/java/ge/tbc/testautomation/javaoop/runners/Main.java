@@ -1,43 +1,54 @@
 package ge.tbc.testautomation.javaoop.runners;
 
-import ge.tbc.testautomation.javaoop.figures.Circle;
-import java.util.Scanner;
+import ge.tbc.testautomation.annotationsAndStreams.Analyzable;
+import ge.tbc.testautomation.annotationsAndStreams.VariableNameAnnotation;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        // ვქმნით ორ Circle ობიექტს, ერთს დადებითი და მეორეს უარყოფითი რადიუსით
-        Circle positiveRadiusCircle = new Circle(7);
-        Circle negativeRadiusCircle = new Circle(-5);
+        // Analyzable კლასის ყველა ველის მიღება
+        Field[] fields = Analyzable.class.getDeclaredFields();
 
-        // ვიძახებთ საერთო მეთოდს თითოეული წრეწირის ობიექტისთვის
-        demonstrateCircle(positiveRadiusCircle, "\nCircle No1");
-        demonstrateCircle(negativeRadiusCircle, "\nCircle No2");
-    }
+        //  Streams-ის გამოყენებით ორი სიის შექმნა
+        List<Field> matchingFields =
+                java.util.Arrays.stream(fields)
+                        .filter(field -> field.isAnnotationPresent(VariableNameAnnotation.class) &&
+                                field.getAnnotation(VariableNameAnnotation.class).name().equalsIgnoreCase(field.getName()))
+                        .collect(Collectors.toList());
 
-    // საერთო მეთოდი წრეწირის დემონსტრაციისთვის
-    private static void demonstrateCircle(Circle circle, String circleName) {
-        System.out.print(circleName + "\nRadius = " + circle.getRadius());
+        List<Field> nonMatchingFields =
+                java.util.Arrays.stream(fields)
+                        .filter(field -> field.isAnnotationPresent(VariableNameAnnotation.class) &&
+                                !field.getAnnotation(VariableNameAnnotation.class).name().equalsIgnoreCase(field.getName()))
+                        .collect(Collectors.toList());
 
-        if (circle.validateCircle(circle)) {
-            System.out.println("\nArea: " + circle.getArea());
-            System.out.println("Length: " + circle.getLength());
-            circle.printPackageName();
 
-            // IResizableCircle მეთოდების დემონსტრაცია
-            circle = circle.returnDoubleSizedCircle(circle);
-            System.out.println("Double Sized Circle Radius: " + circle.getRadius());
-
-            // მომხმარებლის შეყვანის მოთხოვნა
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the multiplier to scale the circle's radius: ");
-            double multiplier = scanner.nextDouble();
-
-            // რადიუსის გაზრდა შეყვანილი მნიშვნელობის მიხედვით
-            circle = circle.returnCustomSizedCircle(circle, multiplier);
-            System.out.println("Custom Sized Circle Radius: " + circle.getRadius());
-
-        } else {
-            System.out.println("\nCircle's radius is not valid.");
+        //ბეჭდვა
+        System.out.print("\nmatching the annotation name: [");
+        for (Field field : matchingFields) {
+            System.out.print(field.getName() + ", ");
         }
+        System.out.println(']');
+
+        System.out.println();
+
+        System.out.print("Not matching the annotation name: [");
+        for (Field field : nonMatchingFields) {
+            System.out.print(field.getName() + ", ");
+        }
+        System.out.println(']');
+
+
+        //7) main-ში შექმენით რამდენიმე ნებისმიერი სახის ცვლადი და არსად გამოიყენოთ,
+        // მაგრამ ქენით ისე, რომ კომპაილერმა unused ცვლადის შენიშვნა არ ამოაგდოს.
+
+        @SuppressWarnings("unused")
+        String str1 = ":)";
+
+        //@SuppressWarnings("unused")
+        int age = 20;
+
     }
 }
