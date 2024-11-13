@@ -1,12 +1,7 @@
 package ge.tbc.testautomation.javaoop.figures;
 
-//დაამატეთ Triangle კლასიც (double a,b,c და h (სიმაღლე) ველებით) და ისიც
-// Figure-ს შვილობილი გახადეთ. ამ კლასშიც გადაფარეთ Figure-ის ორივე მეთოდი,
-// მაგრამ აქ უკვე სამკუთხედის ფორმულით იხელმძღვანელეთ.
-// სიმარტივისთვის სიმაღლე ხელით გაწერეთ.
 public class Triangle {
     private  double a, b, c, h;
-
     //პარამეტრიანი ონსტრუქტორი
     public Triangle(double a, double b, double c, double h) {
         this.a = a;

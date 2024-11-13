@@ -1,20 +1,15 @@
 package ge.tbc.testautomation.javaoop.runners;
-
-//1) ge.tbc.testautomation.runners პაკეტში დაამატეთ ContainersAndComparing კლასი.
-
 import ge.tbc.testautomation.javaoop.figures.Circle;
 import ge.tbc.testautomation.javaoop.figures.Rectangle;
 import ge.tbc.testautomation.javaoop.util.ReverseComparator;
-
 import java.util.*;
 
-// ამ კლასის main მეთოდში შექმენით String ელემენტების მქონე ArrayList და დაამატეთ ეს ელემენტები:
-//* "555-542-231", "555-887-987", "555-161-143", "555-189-6667".
 public class ContainersAndComparing {
     @SuppressWarnings("All")
     public static void main(String[] args) {
         //ახალი სიის შექმნა
         ArrayList<String> arrList = new ArrayList<>();
+
         //სიაში ელემენტების ჩამატება
         arrList.add("\n555-542-231");
         arrList.add("555-887-987");
@@ -38,7 +33,6 @@ public class ContainersAndComparing {
 
         //5) გამოდის, რომ ზემო HashMap-ში იქნება <სახელი-ტელეფონის ნომერი> წყვილები.
         // დაბეჭდეთ ყველა სახელი, ანუ key, რომლის ტელეფონის ნომერიც (value) შეიცავს რვიანს.
-
         for (Object key : phoneMap.keySet()) {
             String value = (String) phoneMap.get(key); //დაყვანა
             if (value.contains("8")) {

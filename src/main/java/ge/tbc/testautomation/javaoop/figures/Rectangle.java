@@ -1,32 +1,28 @@
 package ge.tbc.testautomation.javaoop.figures;
 
-
-//9) შექმენით Rectangle კლასი (ან გამოიყენეთ არსებული) და მისთვის
-// დაწერეთ reverse comparator და ამ კომპარატორის მიხედვით დაალაგეთ
-// Rectangle ობიექტების ლისტი.
-public class Rectangle {
+public class Rectangle extends Figure {
     private  double a, b;
-
     //პარამეტრიანი კოსტრუქტორი
     public Rectangle(double b, double a) {
         this.b = b;
         this.a = a;
     }
+
     // ფუნქცია ფართობისთის
     public double getArea() {
         return a*b;
     }
 
-    // ფუნქცია პერიმეტრისთვის
-    public double getPerimeter() {
-        return 2*(a+b);
-    }
+    @Override
+    public double getLength() {return 2*(a+b);}
 
+    @Override
+    public void printPackageName() {System.out.println(this.getClass().getPackage().getName());}
 
     //ბეჭდვის ფუნქცია
     public void print(){
         System.out.println("\nმართკუთხედის გვერდებია: " + a + " " +b);
-        System.out.println("პერიმეტრი:" + this.getPerimeter());
+        System.out.println("პერიმეტრი:" + this.getLength());
         System.out.println("ფართობი:" + this.getArea());
 
     }
@@ -34,6 +30,6 @@ public class Rectangle {
     //toString მეთოდის გადაფარვა
     @Override
     public String toString() {
-        return "Rectangle perimetr " + getPerimeter();
+        return "Rectangle perimetr " + getLength();
     }
 }
